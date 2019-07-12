@@ -1,5 +1,18 @@
 # Philips-P2000-Emulation
+
 Blow new live in the old Philips P2000 Emulator of Marcel de Kogel
+
+make_M2000.sh is made for compiling the old  
+
+P2000 emulator \(1997\) from Marcel de Kogel
+
+on the raspberry pi or x86 with raspbian.
+
+It has been tested on raspbian stretch.
+
+It should work on debian or ubuntu too, but is untested.
+
+For now, only the UNIX/X version works.
 
 # Program : make_M2000.sh
 
@@ -25,7 +38,7 @@ Version : 1
 
 Use : 
 
-P2000Xstation is a simple program created to run Philips P2000 .cas files from your windows desktop enviroment (X).
+P2000Xstation is a simple program created to run the emulator with the selected Philips P2000 .cas files from your windows desktop enviroment (X).
 
 Dependencies : 
 
