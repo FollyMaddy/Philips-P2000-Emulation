@@ -3,7 +3,7 @@
 # Program : P2000Xstation.py
 # Version : 1
 # Use : 
-# P2000Xstation is a simple program created to run Philips P2000 .cas files from your windows desktop enviroment (X).
+# P2000Xstation is a simple program created to run the emulator with the selected Philips P2000 .cas files from your windows desktop enviroment (X).
 # Dependencies : 
 # This program only works if the P2000 emulator is compiled on your computer with make_M2000.sh.
 # Also make sure you have installed the desired python-modules.
