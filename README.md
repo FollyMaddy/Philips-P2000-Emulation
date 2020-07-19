@@ -55,3 +55,73 @@ Make the program executable, dubbleclick and choose open in terminal.
 You can run it also directly from the terminal with : python P2000Xstation.py
 
 Or run it from the terminal with : ./P2000Xstation.py
+
+
+# My post info on retropie
+
+18 jul. 2019 11:02
+
+Although this post is quite old it seems still relevant and it shoud be nice if it could be added to RetroPie.
+
+I did some investigation about the Philips P2000.
+
+The fastest way of emulating the P2000 is to use DOSbox and the P2000 emulator for DOS.
+
+This is my directory structure :
+
+/home/pi/RetroPie/roms/EmuOnDos/Philips_P2000T/M2000.exe (emulator)
+
+/home/pi/RetroPie/roms/EmuOnDos/Philips_P2000T/games (.cas files)
+
+/home/pi/RetroPie/roms/pc/EmuOnDos/P2000T (all executable .sh starters for .cas files)
+
+An .sh starter contains the following, were as "leeg.cas" can be any .cas file :
+
+/home/pi/RetroPie/roms/pc/EmuOnDos/P2000T/leeg.cas.sh :
+
+#!/bin/bash
+
+/opt/retropie/emulators/dosbox/bin/dosbox -fullscreen -scaler normal3x -c "@echo off" -c "mount c: ~/RetroPie/roms/EmuOnDos/Philips_P2000T" -c "cls" -c "c:" -c "m2000 -verbose 0 -boot 1 -tape games/leeg.cas" -c "exit"
+
+I also tested the source code on raspbian stretch.
+
+The source code is 22 years old but it still works.
+
+I've got the UNIX/X version working again by adding bpp!=24 in X.c.
+
+Compiled with :
+
+make -f Makefile.X
+
+
+Installed alsa-oss for OSS emulation though alsa :
+
+sudo apt-get install alsa-oss
+
+
+A proper command, that works from every directory, can be (aoss is for sound):
+
+aoss /your/emulator/dir/m2000 -video 1 -boot 1 -tape /your/emulator/leeg.cas -font /your/emulator/dir/Default.fnt
+
+(Beware, the emulator stops if the window is not active, so click on the emulator window.)
+
+
+By the way : "I'm not that good in C programming, still learning".
+
+But it seems that for running this code in RetroPie there are a lot of to do's.
+
+
+To Do's :
+
+make one universal version that can be run in X and also in RetroPie;
+
+if in a window, add more windows scalablility;
+
+add SDL video and audio;
+
+if SDL audio is a problem then add Alsa audio;
+
+remove SVGAlib version.
+
+Who has a good idea of making the source code work in RetroPie ???
+
