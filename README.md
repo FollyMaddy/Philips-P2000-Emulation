@@ -1,3 +1,9 @@
+You can find manuals about P2000C P2000T and P2000M computers over here :
+
+http://www.vintagecomputer.net/fjkraan/comp/p2000c/doc/
+
+(not all manuals are there though !)
+
 # Philips-P2000-Emulation
 
 Blow new live in the old Philips P2000 Emulator of Marcel de Kogel
@@ -13,6 +19,7 @@ It has been tested on raspbian stretch.
 It should work on debian or ubuntu too, but is untested.
 
 For now, only the UNIX/X version works.
+
 
 # Program : make_M2000.sh
 
