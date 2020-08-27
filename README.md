@@ -1,8 +1,6 @@
-You can find manuals about P2000C P2000T and P2000M computers over here :
+Use this script to get most P2000 related documentation files :
 
-http://www.vintagecomputer.net/fjkraan/comp/p2000c/doc/
-
-(not all manuals are there though !)
+https://github.com/FollyMaddy/scraper-tools/blob/master/Philips_P2000_documents.sh
 
 # Philips-P2000-Emulation
 
