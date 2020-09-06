@@ -48,7 +48,7 @@ ROM = tkFileDialog.askopenfilename(initialdir = '%s/P2000/games' %(cwd) , title=
 SYSTEM = ROM.split("/", ROM.count("/"))[5]
 # create commandline as string (insert system type and filename to run)
 # Default.fnt has to be in the same directory otherwise it will not work
-cmd_run_emu = 'aoss %s/P2000/m2000 -video 1 -boot 1 -tape %s -font %s/P2000/Default.fnt' %(cwd,ROM,cwd)
+cmd_run_emu = 'aoss %s/P2000/m2000 -video 1 -boot 1 -tape "%s" -font %s/P2000/Default.fnt' %(cwd,ROM,cwd)
 print cmd_run_emu
 # run command cmd will only work from program directory
 os.system(cmd_run_emu)
