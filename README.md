@@ -134,6 +134,8 @@ Who has a good idea of making the source code work in RetroPie ???
 
 # My second post info on retropie
 
+12 aug. 2020
+
 This is an update on running Philips P2000 emulator of Marcel de Kogel "M2000.exe" on lr-dosbox.
 
 Philips-P2000 on RPI4 32 bit OS (Buster) with lr-dosbox :
