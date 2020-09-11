@@ -27,7 +27,7 @@ Use :
 
 This script is made to bring new live to the old Philips P2000 emulator from Marcel de Kogel.
 
-It Downloads the source, patches the sourcefile X.c and compiles the Philips P2000 emulator.
+It downloads the source, patches the sourcefile X.c and compiles the Philips P2000 emulator.
 
 For now, only the UNIX/X version works.
 
@@ -61,8 +61,9 @@ You can run it also directly from the terminal with : python P2000Xstation.py
 
 Or run it from the terminal with : ./P2000Xstation.py
 
+# Two posts about how to use the emulator with DosBox (first post) and lr-dosbox (second post)
 
-# My post info on retropie
+# My first post info on retropie
 
 18 jul. 2019 11:02
 
@@ -129,4 +130,66 @@ if SDL audio is a problem then add Alsa audio;
 remove SVGAlib version.
 
 Who has a good idea of making the source code work in RetroPie ???
+
+
+# My second post info on retropie
+
+This is an update on running Philips P2000 emulator of Marcel de Kogel "M2000.exe" on lr-dosbox.
+
+Philips-P2000 on RPI4 32 bit OS (Buster) with lr-dosbox :
+
+Change a few core-options in /opt/retropie/configs/all/retroarch-core-options.cfg :
+
+dosbox_cpu_cycles = "9"
+
+dosbox_pcspeaker = "true"
+
+Make a bat file for example Lazy-Bug.bat :
+
+
+@echo off
+
+cls
+
+c:
+
+m2000 -verbose 0 -boot 1 -tape games/Lazy-Bug.cas
+
+exit
+
+
+Place it in :
+
+/home/pi/Desktop/roms/pc/P2000/Lazy-Bug.bat
+
+Games should be in :
+
+/home/pi/Desktop/roms/pc/P2000/games/Lazy-Bug.cas
+
+
+Emulator should be in :
+
+/home/pi/Desktop/roms/pc/P2000/M2000.EXE
+
+With these other files :
+
+BASIC.BIN CWSDPR0.EXE M2000.TXT
+
+CWSDPMI.DOC CWSPARAM.DOC P2000ROM.BIN
+
+CWSDPMI.EXE CWSPARAM.EXE
+
+CWSDPMI.ZIP DEFAULT.FNT
+
+
+Automatically make all .bat files from .cas files in /home/pi/Desktop/roms/pc/P2000/games/*.cas :
+
+open terminal and paste these commands :
+
+
+cd /home/pi/Desktop/roms/pc/P2000/
+
+for file in $(ls games | cut -d '.' -f 1); do touch $file.bat; echo -ne @echo off '\n'cls'\n'c:'\n'm2000 -verbose 0 -boot 1 -tape games/$file.cas'\n'exit > $file.bat; done
+
+Works pretty good :)
 
