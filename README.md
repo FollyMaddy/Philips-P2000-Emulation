@@ -195,3 +195,15 @@ for file in $(ls games | cut -d '.' -f 1); do touch $file.bat; echo -ne @echo of
 
 Works pretty good :)
 
+# p2000-xdo.sh
+
+An attempt to use xdotool in linux to simulate keypresses for the emulator m2000.
+
+This way you can automate typing a basic file that exists as a text file on the host computer.
+
+In some basic you find ~ (tilde) or { ("opening bracket").
+
+These are probably mistakes as the p2000 doesn't have these keys.
+
+Sadly the keys / (slash) and ? (question) don't work correctly.
+
