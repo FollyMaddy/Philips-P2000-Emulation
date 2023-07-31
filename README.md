@@ -207,6 +207,8 @@ These are probably mistakes as the p2000 doesn't have these keys or these they r
 
 Sadly the keys / (slash) and ? (question) don't work correctly.
 
+(Using the slash keys on Raspberry Pi OS will freeze the terminal !)
+
 The program echo's the output for debugging. (bash p2000-xdo.sh)
 
 To execute the output just do something like this :
