@@ -203,7 +203,7 @@ This way you can automate typing a basic file that exists as a text file on the 
 
 In some basic you find ~ (tilde) or { ("opening bracket").
 
-These are probably mistakes as the p2000 doesn't have these keys.
+These are probably mistakes as the p2000 doesn't have these keys or these they represent other ASCII values that are p2000 specific.
 
 Sadly the keys / (slash) and ? (question) don't work correctly.
 
