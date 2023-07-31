@@ -14,7 +14,7 @@ linenumber=$(echo "$line"|cut -d" " -f1)
 [[ $oldnumber == yes ]] && [[ $number == yes ]] && echo xdotool keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
 [[ $oldnumber == no ]] && [[ $number == yes ]] && echo xdotool keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
 #[[ $oldnumber == no ]] && [[ $number == no ]] && echo "skip enter"
-[[ -z $line ]] && echo xdotool keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
+[[ -z $line ]] && echo xdotool sleep 0.05 keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
 #replace space with underscore
 line="$(echo "$line"|sed 's/ /_/g')"
 echo "$line"|while read -n 1 char
@@ -36,7 +36,8 @@ char=${char,,} #char to lowercase
 [[ $char == ':' ]] && char=quoteright #colon
 [[ $char == '-' ]] && char=minus #colon
 [[ $char == '*' ]] && char="Shift + apostrophe" #asterisk
-[[ $char == '/' ]] && char=0x002f #slash
+#[[ $char == '/' ]] && char=0x002f #slash
+[[ $char == '/' ]] && char=slash
 [[ $char == '?' ]] && char="Shift + slash" #question
 [[ $char == '!' ]] && char="Shift + 1" #exclamdown
 [[ $char == '`' ]] && char="Shift + 7"
@@ -45,7 +46,8 @@ char=${char,,} #char to lowercase
 #'~'
 #'}'
 
-echo xdotool $([[ $char == Shift* ]]&& echo keydown Shift sleep 0.05) keydown "$(echo "$char"|sed "s/Shift + //g")" sleep 0.05  keyup "$(echo "$char"|sed "s/Shift + //g")" sleep 0.05 $([[ $char == Shift* ]]&& echo keyup Shift sleep 0.05)
+output="$(echo "$char"|sed "s/Shift + //g")"
+[[ -n $output ]] && echo xdotool sleep 0.05 $([[ $char == Shift* ]]&& echo keydown Shift sleep 0.05) keydown "$output" sleep 0.05  keyup "$output" sleep 0.05 $([[ $char == Shift* ]]&& echo keyup Shift sleep 0.05)
 done
 linenumber=$(echo "$line"|cut -d" " -f1)
 [[ $linenumber =~ ^[0-9]+$ ]] && oldnumber=yes || oldnumber=no
