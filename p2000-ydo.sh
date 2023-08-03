@@ -11,23 +11,25 @@ cat $1 |\
 while read line
 do
 linenumber=$(echo "$line"|cut -d" " -f1)
+
 [[ $linenumber =~ ^[0-9]+$ ]] && number=yes || number=no
-[[ $oldnumber == yes ]] && [[ $number == yes ]] && echo xdotool keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
-[[ $oldnumber == no ]] && [[ $number == yes ]] && echo xdotool keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
+[[ $oldnumber == yes ]] && [[ $number == yes ]] && echo eval YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key 28:1 -d 100 28:0 -d 100
+[[ $oldnumber == no ]] && [[ $number == yes ]] && echo eval YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key 28:1 -d 100 28:0 -d 100
 #[[ $oldnumber == no ]] && [[ $number == no ]] && echo "skip enter"
-[[ -z $line ]] && echo xdotool sleep 0.05 keydown "Return" sleep 0.05 keyup "Return" sleep 0.05
-#replace space with underscore
-line="$(echo "$line"|sed 's/ /_/g')"
+[[ -z $line ]] && echo eval YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key 28:1 -d 100 28:0 -d 100
+
+#replace space with copyright sign
+line="$(echo "$line"|sed 's/ /©/g')"
 echo "$line"|while read -n 1 char
 do
-[[ $char == '1' ]] && char=2
-[[ $char == '2' ]] && char=3
-[[ $char == '3' ]] && char=4
-[[ $char == '4' ]] && char=5
-[[ $char == '5' ]] && char=6
-[[ $char == '6' ]] && char=7
-[[ $char == '7' ]] && char=8
-[[ $char == '8' ]] && char=9
+[[ $char == '1' ]] && char=" 2"
+[[ $char == '2' ]] && char=" 3"
+[[ $char == '3' ]] && char=" 4"
+[[ $char == '4' ]] && char=" 5"
+[[ $char == '5' ]] && char=" 6"
+[[ $char == '6' ]] && char=" 7"
+[[ $char == '7' ]] && char=" 8"
+[[ $char == '8' ]] && char=" 9"
 [[ $char == '9' ]] && char=10
 [[ $char == '0' ]] && char=11
 
@@ -85,47 +87,53 @@ do
 [[ $char == 'Y' ]] && char=42+21
 [[ $char == 'Z' ]] && char=42+44
 
-[[ $char == '_' ]] && char=57 #KEY_SPACE
+#if copyright sign then use space
+[[ $char == '©' ]] && char=57 #KEY_SPACE
 
-[[ $char == ',' ]] && char=52
-[[ $char == '.' ]] && char=51
-[[ $char == '/' ]] && char=53
+[[ $char == ',' ]] && char=51 #KEY_COMMA
+#[[ $char == ',' ]] && char=42+51 #KEY_SHIFT + KEY_COMMA
+[[ $char == '.' ]] && char=52 #KEY_DOT
+#[[ $char == '.' ]] && char=42+52 ##KEY_SHIFT + KEY_DOT
+[[ $char == '/' ]] && char=53 #KEY_SLASH
+[[ $char == '?' ]] && char=42+53 #KEY_SHIFT + KEY_SLASH
 
 [[ $char == ';' ]] && char=39
+[[ $char == '+' ]] && char=42+39 #KEY_SHIFT + 
 [[ $char == ':' ]] && char=40 #KEY_APOSTROPHE "'"
-[[ $char == '#' ]] && char=43 #KEY_RIGHTBRACE "\"
+[[ $char == '*' ]] && char=42+40 #KEY_SHIFT + KEY_APOSTROPHE "'"
+[[ $char == '#' ]] && char=43 #KEY_BACKSLASH "\"
+[[ $char == '█' ]] && char=42+43 #KEY_SHIFT + KEY_BACKSLASH "\"
 
 [[ $char == '@' ]] && char=26 #KEY_LEFTBRACE "["
-#NOT defines : KEY_RIGHTBRACE		27
+[[ $char == '↑' ]] && char=42+26 #KEY_SHIFT + KEY_LEFTBRACE "["
+[[ $char == '→' ]] && char=27 #KEY_RIGHTBRACE "]"
+[[ $char == '←' ]] && char=42+27 #KEY_SHIFT + KEY_RIGHTBRACE "]"
 
-[[ $char == '-' ]] && char=12
+[[ $char == '!' ]] && char=42+2 #KEY_SHIFT + KEY_1
+[[ $char == '"' ]] && char=42+3 #KEY_SHIFT + KEY_2
+[[ $char == '£' ]] && char=42+4 #KEY_SHIFT + KEY_3
+[[ $char == '$' ]] && char=42+5 #KEY_SHIFT + KEY_4
+[[ $char == '%' ]] && char=42+6 #KEY_SHIFT + KEY_5
+[[ $char == '&' ]] && char=42+7 #KEY_SHIFT + KEY_6
+[[ $char == '`' ]] && char=42+8 #KEY_SHIFT + KEY_7
+[[ $char == '(' ]] && char=42+9 #KEY_SHIFT + KEY_8
+[[ $char == ')' ]] && char=42+10 #KEY_SHIFT + KEY_9
+[[ $char == "=" ]] && char=42+11 #KEY_SHIFT + KEY_0
+[[ $char == '-' ]] && char=12 #KEY_MINUS "-"
+[[ $char == '_' ]] && char=42+12 #KEY_SHIFT + KEY_MINUS "-"
+[[ $char == '¼' ]] && char=13 #KEY_EQUAL "="
+[[ $char == '¾' ]] && char=42+13 #KEY_SHIFT + KEY_EQUAL "="
 
-[[ $char == '<' ]] && char=111
-
-[[ $char == '$' ]] && char=
-
-[[ $char == '&' ]] && char=
-[[ $char == '+' ]] && char=
-[[ $char == "=" ]] && char=
-[[ $char == '"' ]] && char=
-[[ $char == '>' ]] && char=42+111
-[[ $char == '(' ]] && char=
-[[ $char == ')' ]] && char=
-
-
-
-[[ $char == '*' ]] && char=
-
-[[ $char == '?' ]] && char=
-[[ $char == '!' ]] && char=
-[[ $char == '`' ]] && char=
-[[ $char == '%' ]] && char=
+[[ $char == '<' ]] && char=111 #KEY_DELETE
+[[ $char == '>' ]] && char=42+111 #KEY_SHIFT + KEY_DELETE
 
 #'~'
 #'}'
-
-output="$(echo "$char"|sed "s/Shift + //g")"
-[[ -n $output ]] && YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key 42+:1 -d 200 43:1 -d 100 43:0 -d 100 42+:0 -d 100
+charcode=$(echo "$char"|sed "s/42+//g")
+[[ -n $charcode ]] && echo eval YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key \
+$([[ $char == 42+* ]] && echo 42:1 -d 200) \
+$charcode:1 -d 100 $charcode:0 -d 100 \
+$([[ $char == 42+* ]] && echo 42:0 -d 100)
 done
 linenumber=$(echo "$line"|cut -d" " -f1)
 [[ $linenumber =~ ^[0-9]+$ ]] && oldnumber=yes || oldnumber=no
