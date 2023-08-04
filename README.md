@@ -227,7 +227,7 @@ An attempt to use ydotool in linux to simulate keypresses for the emulator m2000
 
 This way you can automate typing a basic file that exists as a text file on the host computer.
 
-In some basic you find some special characters I tried to add these as much as posible.
+In some basic you find some special characters I tried to add these as much as possible.
 
 All keys can be read inside the script
 
