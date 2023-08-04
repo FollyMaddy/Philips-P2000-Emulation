@@ -195,7 +195,7 @@ for file in $(ls games | cut -d '.' -f 1); do touch $file.bat; echo -ne @echo of
 
 Works pretty good :)
 
-# p2000-xdo.sh
+# p2000-xdo.sh (not working correctly try and use p2000-ydo.sh !)
 
 An attempt to use xdotool in linux to simulate keypresses for the emulator m2000.
 
@@ -203,14 +203,61 @@ This way you can automate typing a basic file that exists as a text file on the 
 
 In some basic you find ~ (tilde) or { ("opening bracket").
 
-These are probably mistakes as the p2000 doesn't have these keys or these represent other ASCII values that are p2000 specific.
+These are no mistakes but represent other charachters of the p2000.
 
-Sadly the keys / (slash) and ? (question) don't work correctly.
+Sadly the keys / (slash) and ? (question) or uppercase don't work correctly.
 
-(Using the slash keys on Raspberry Pi OS will freeze the terminal !)
+Uppercase is therefor turned off.
 
-The program echo's the output for debugging. (bash p2000-xdo.sh)
+For slash and question these is no solution.
+
+And using the slash keys on Raspberry Pi OS will freeze the terminal !
+
+The program echo's the output for debugging. (bash p2000-xdo.sh mybasicfile.bas)
 
 To execute the output just do something like this :
 
 bash p2000-xdo.sh mybasicfile.bas|while read cmd;do $cmd;done
+
+Then you have 5 seconds to click the main window of m2000 so typing can begin !
+
+# p2000-ydo.sh
+
+An attempt to use ydotool in linux to simulate keypresses for the emulator m2000.
+
+This way you can automate typing a basic file that exists as a text file on the host computer.
+
+In some basic you find some special characters I tried to add these as much as posible.
+
+All keys can be read inside the script
+
+Seems ydotool does a much better job with special characters and uppercase/lowercase than xdotool does !
+
+The program echo's the output for debugging. (bash p2000-ydo.sh mybasicfile.bas)
+
+To use the program install ydotoold and ydotool from source like described on this page :
+
+https://gabrielstaples.com/ydotool-tutorial/#gsc.tab=0
+
+(these packages are too old and will not work when installing with : sudo apt install ydotoold ydotool)
+
+I found that I had to install xinput aswell with : sudo apt install xinput
+
+To execute the output just do something like this :
+
+sudo -b ydotoold --socket-path="$HOME/.ydotool_socket" --socket-own="$(id -u):$(id -g)"
+
+(press enter when it says ready)
+
+bash p2000-xdo.sh mybasicfile.bas|while read cmd;do $cmd;done
+
+Then you have 5 seconds to click the main window of m2000 so typing can begin !
+
+BTW.
+
+The basic files that can be found for p2000 have lots of whitespace or lines are spread over multiple lines.
+
+The best way is to edit the basic file before using.
+
+I have built in a workaround for the multiple line issue but will not always work if the second line starts with a number and a space.
+
