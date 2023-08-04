@@ -103,11 +103,15 @@ do
 [[ $char == '*' ]] && char=42+40 #KEY_SHIFT + KEY_APOSTROPHE "'"
 [[ $char == '#' ]] && char=43 #KEY_BACKSLASH "\"
 [[ $char == '█' ]] && char=42+43 #KEY_SHIFT + KEY_BACKSLASH "\"
+[[ $char == '' ]] && char=42+43 #KEY_SHIFT + KEY_BACKSLASH "\"
 
 [[ $char == '@' ]] && char=26 #KEY_LEFTBRACE "["
-[[ $char == '↑' ]] && char=42+26 #KEY_SHIFT + KEY_LEFTBRACE "["
-[[ $char == '→' ]] && char=27 #KEY_RIGHTBRACE "]"
-[[ $char == '←' ]] && char=42+27 #KEY_SHIFT + KEY_RIGHTBRACE "]"
+[[ $char == '↑' ]] && char=42+26 #KEY_SHIFT + KEY_LEFTBRACE "["  / same as next
+[[ $char == '' ]] && char=42+26 #KEY_SHIFT + KEY_LEFTBRACE "["
+[[ $char == '→' ]] && char=27 #KEY_RIGHTBRACE "]"  / same as next
+[[ $char == '' ]] && char=27 #KEY_RIGHTBRACE "]"
+[[ $char == '←' ]] && char=42+27 #KEY_SHIFT + KEY_RIGHTBRACE "]"  / same as next
+[[ $char == '' ]] && char=42+27 #KEY_SHIFT + KEY_RIGHTBRACE "]"
 
 [[ $char == '!' ]] && char=42+2 #KEY_SHIFT + KEY_1
 [[ $char == '"' ]] && char=42+3 #KEY_SHIFT + KEY_2
@@ -115,20 +119,32 @@ do
 [[ $char == '$' ]] && char=42+5 #KEY_SHIFT + KEY_4
 [[ $char == '%' ]] && char=42+6 #KEY_SHIFT + KEY_5
 [[ $char == '&' ]] && char=42+7 #KEY_SHIFT + KEY_6
-[[ $char == '`' ]] && char=42+8 #KEY_SHIFT + KEY_7
+[[ $char == "'" ]] && char=42+8 #KEY_SHIFT + KEY_7
 [[ $char == '(' ]] && char=42+9 #KEY_SHIFT + KEY_8
 [[ $char == ')' ]] && char=42+10 #KEY_SHIFT + KEY_9
 [[ $char == "=" ]] && char=42+11 #KEY_SHIFT + KEY_0
 [[ $char == '-' ]] && char=12 #KEY_MINUS "-"
-[[ $char == '_' ]] && char=42+12 #KEY_SHIFT + KEY_MINUS "-"
-[[ $char == '¼' ]] && char=13 #KEY_EQUAL "="
-[[ $char == '¾' ]] && char=42+13 #KEY_SHIFT + KEY_EQUAL "="
+[[ $char == '_' ]] && char=42+12 #KEY_SHIFT + KEY_MINUS "-" / same as next
+[[ $char == '`' ]] && char=42+12 #KEY_SHIFT + KEY_MINUS "-"
+
+[[ $char == '¼' ]] && char=13 #KEY_EQUAL "=" / same as next
+[[ $char == '{' ]] && char=13 #KEY_EQUAL "="
+[[ $char == '¾' ]] && char=42+13 #KEY_SHIFT + KEY_EQUAL "=" / same as next
+[[ $char == '}' ]] && char=42+13 #KEY_SHIFT + KEY_EQUAL "="
 
 [[ $char == '<' ]] && char=111 #KEY_DELETE
 [[ $char == '>' ]] && char=42+111 #KEY_SHIFT + KEY_DELETE
 
-#'~'
-#'}'
+#unknown keys
+[[ $char == '½' ]] && char= #  / same as next
+[[ $char == '~' ]] && char=
+#unknown keys
+[[ $char == '÷' ]] && char= #  / same as next
+[[ $char == '\' ]] && char=
+#unknown keys
+[[ $char == '||' ]] && char= #  / same as next
+[[ $char == '|' ]] && char=
+
 charcode=$(echo "$char"|sed "s/42+//g")
 [[ -n $charcode ]] && echo eval YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key \
 $([[ $char == 42+* ]] && echo 42:1 -d 200) \
