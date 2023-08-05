@@ -249,7 +249,7 @@ sudo -b ydotoold --socket-path="$HOME/.ydotool_socket" --socket-own="$(id -u):$(
 
 (press enter when it says ready)
 
-bash p2000-xdo.sh mybasicfile.bas|while read cmd;do $cmd;done
+bash p2000-ydo.sh mybasicfile.bas|while read cmd;do $cmd;done
 
 Then you have 5 seconds to click the main window of m2000 so typing can begin !
 
@@ -259,5 +259,5 @@ The basic files that can be found for p2000 have lots of whitespace or lines are
 
 The best way is to edit the basic file before using.
 
-I have built in a workaround for the multiple line issue but will not always work if the second line starts with a number and a space.
+I have built in a workaround for the multiple line issue but this will not always work if the second line starts with a number and a space.
 
